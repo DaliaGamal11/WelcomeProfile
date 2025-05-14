@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <script src="cookies.js"></script>
+</head>
+<body>
+    <h2>Register</h2>
+
+    <label>Enter your name:</label>
+    <input type="text" id="username"><br><br>
+
+    <label>Enter your age:</label>
+    <input type="number" id="age"><br><br>
+
+    <label>Select your Gender:</label><br>
+    <input type="radio" name="gender" value="male" id="male">
+    <label for="male"><img src="1.jpg" width="160" ></label>
+
+    <input type="radio" name="gender" value="female" id="female">
+    <label for="female"><img src="2.jpg" width="250" height="280"></label><br><br>
+
+    <label>Select your favorite color:</label>
+    <select id="color">
+        <option>Red</option>
+        <option>Blue</option>
+        <option>Green</option>
+        <option>Black</option>
+    </select><br><br>
+
+    <button onclick="registerUser()">Register</button>
+
+    <script>
+        function registerUser() {
+            var name = document.getElementById('username').value;
+            var age = document.getElementById('age').value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var color = document.getElementById('color').value;
+
+            if (!name || !age || !gender) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            setCookie('username', name, 30);
+            setCookie('age', age, 30);
+            setCookie('gender', gender.value, 30);
+            setCookie('color', color, 30);
+
+            var visitsKey = 'visits_' + name;
+            var visits = parseInt(getCookie(visitsKey) || '0') + 1;
+            setCookie(visitsKey, visits, 30);
+
+            window.location.href = "profile.html";
+        }
+    </script>
+</body>
+</html>
