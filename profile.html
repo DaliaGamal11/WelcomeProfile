@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Page</title>
+    <script src="cookies.js"></script>
+</head>
+<body onload="loadProfile()">
+    <div id="profile"></div>
+
+    <script>
+        function loadProfile() {
+            var name = getCookie('username');
+            var gender = getCookie('gender');
+            var color = getCookie('color');
+            
+            var visitsKey = 'visits_' + name;
+            var visits = parseInt(getCookie(visitsKey) || '0') + 1;
+            setCookie(visitsKey, visits, 30); //REfreshing 
+
+
+            const image = gender === 'male' ? '1.jpg' : '2.jpg';
+
+            document.getElementById('profile').innerHTML = `
+                <img src="${image}" width="180"><br><br>
+                <span style="color: ${color}; font-size: 20px;">
+                    Welcome <strong>${name}</strong>, you have visited this site <strong>${visits}</strong> times :)
+                </span>
+            `;
+        }
+    </script>
+</body>
+</html>
